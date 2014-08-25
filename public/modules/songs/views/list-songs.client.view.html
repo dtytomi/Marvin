@@ -1,0 +1,22 @@
+<section data-ng-controller="SongsController" data-ng-init="find()" id="main">
+    <div class="page-header">
+        <h1>Songs</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="song in songs" data-ng-href="#!/songs/{{song._id}}" class="list-group-item">
+			<small class="list-group-item-text">
+				Posted on
+				<span data-ng-bind="song.created | date:'medium'"></span>
+				by
+				<span data-ng-bind="song.user.displayName"></span>
+			</small>
+			<h4 class="list-group-item-heading" data-ng-bind="song.title"></h4>
+            <p class="list-group-item-text" data-ng-bind="song.artist"></p>
+            <p class="list-group-item-text" data-ng-bind="song.genre"></p>
+            <p class="list-group-item-text" data-ng-bind="song.rating"></p>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!songs.$resolved || songs.length">
+    	No Songs yet, why don't you <a href="/#!/songs/create">create one</a>?
+    </div>
+</section>
