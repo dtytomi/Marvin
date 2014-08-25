@@ -6,4 +6,4 @@ env:
 services:
   - mongodb
 after_success:
-  - git push https://github.com/dtytomi/Marvin.git master
+  - git push git@heroku.com:keyz-beat.git master
