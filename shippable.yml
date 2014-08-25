@@ -5,3 +5,5 @@ env:
   - NODE_ENV=production
 services:
   - mongodb
+after_success:
+  - git push https://github.com/dtytomi/Marvin.git master
