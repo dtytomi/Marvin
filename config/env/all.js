@@ -2,9 +2,9 @@
 
 module.exports = {
 	app: {
-		title: 'keyz-beat',
-		description: 'Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js',
-		keywords: 'MongoDB, Express, AngularJS, Node.js'
+		title: 'Keyz Beat',
+		description: 'Music Reviewing Site',
+		keywords: 'Artist, Song, Title, Picture'
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',
@@ -17,15 +17,16 @@ module.exports = {
 				'public/lib/bootstrap/dist/css/bootstrap-theme.css',
 			],
 			js: [
+				'public/lib/ng-file-upload-shim/angular-file-upload-shim.min.js',			
 				'public/lib/angular/angular.js',
+				'public/lib/ng-file-upload/angular-file-upload.min.js',
 				'public/lib/angular-resource/angular-resource.js', 
-				'public/lib/angular-cookies/angular-cookies.js', 
 				'public/lib/angular-animate/angular-animate.js', 
-				'public/lib/angular-touch/angular-touch.js', 
-				'public/lib/angular-sanitize/angular-sanitize.js', 
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
-				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js'
+				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
+				'public/lib/angular-touch/angular-touch.min.js'
+							
 			]
 		},
 		css: [
