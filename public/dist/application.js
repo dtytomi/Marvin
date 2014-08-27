@@ -9,8 +9,7 @@ var ApplicationConfiguration = function () {
         'ngTouch',
         'ui.router',
         'ui.bootstrap',
-        'ui.utils',
-        'angularFileUpload'
+        'ui.utils'
       ];
     // Add a new vertical module
     var registerModule = function (moduleName, dependencies) {
