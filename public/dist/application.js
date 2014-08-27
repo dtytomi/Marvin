@@ -43,6 +43,8 @@ angular.element(document).ready(function () {
 });'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('core');'use strict';
+// Use applicaion configuration module to register a new module
+ApplicationConfiguration.registerModule('songs');'use strict';
 // Use Applicaion configuration module to register a new module
 ApplicationConfiguration.registerModule('users');'use strict';
 // Setting up route
@@ -221,6 +223,162 @@ angular.module('core').service('Menus', [function () {
     //Adding the topbar menu
     this.addMenu('topbar');
   }]);'use strict';
+// Configuring the Articles module
+angular.module('songs').run([
+  'Menus',
+  function (Menus) {
+    // Set top bar menu items
+    Menus.addMenuItem('topbar', 'Songs', 'songs', 'dropdown', '/songs(/create)?');
+    Menus.addSubMenuItem('topbar', 'songs', 'List Songs', 'songs');
+    Menus.addSubMenuItem('topbar', 'songs', 'New Song', 'songs/create');
+  }
+]);'use strict';
+//Setting up route
+angular.module('songs').config([
+  '$stateProvider',
+  function ($stateProvider) {
+    // Songs state routing
+    $stateProvider.state('listSongs', {
+      url: '/songs',
+      templateUrl: 'modules/songs/views/list-songs.client.view.html'
+    }).state('createSong', {
+      url: '/songs/create',
+      templateUrl: 'modules/songs/views/create-song.client.view.html'
+    }).state('viewSong', {
+      url: '/songs/:songId',
+      templateUrl: 'modules/songs/views/view-song.client.view.html'
+    }).state('listSongsByGenre', {
+      url: '/songs/findByGenre/:genre',
+      templateUrl: 'modules/songs/views/list-songs.client.view.html'
+    }).state('editSong', {
+      url: '/songs/:songId/edit',
+      templateUrl: 'modules/songs/views/edit-song.client.view.html'
+    });
+  }
+]);'use strict';
+// Songs controller
+angular.module('songs').controller('SongsController', [
+  '$scope',
+  '$upload',
+  '$stateParams',
+  '$state',
+  '$location',
+  'Authentication',
+  'Songs',
+  function ($scope, $upload, $stateParams, $state, $location, Authentication, Songs) {
+    $scope.authentication = Authentication;
+    // Create new Song
+    $scope.create = function () {
+      // Create new Song object
+      var song = new Songs($scope.song);
+      $scope.song.rating = $scope.rate;
+      // Redirect after save
+      $scope.upload = $upload.upload({
+        url: '/songs',
+        method: 'POST',
+        data: $scope.song,
+        file: $scope.files[0]
+      }).success(function (response) {
+        $location.path('songs/' + response._id);
+      }).error(function (err) {
+        console.log('Error uploading file: ' + err.message || err);
+      });
+    };
+    // Upload Image
+    $scope.onFileSelect = function ($files) {
+      $scope.files = $files;
+    };
+    // Remove existing Song
+    $scope.remove = function (song) {
+      if (song) {
+        song.$remove();
+        for (var i in $scope.songs) {
+          if ($scope.songs[i] === song) {
+            $scope.songs.splice(i, 1);
+          }
+        }
+      } else {
+        $scope.song.$remove(function () {
+          $location.path('songs');
+        });
+      }
+    };
+    // Update existing Song
+    $scope.update = function () {
+      var song = $scope.song;
+      song.$update(function () {
+        $location.path('songs/' + song._id);
+      }, function (errorResponse) {
+        $scope.error = errorResponse.data.message;
+      });
+    };
+    // Find a list of Songs
+    $scope.find = function () {
+      console.log($stateParams);
+      if ($stateParams.genre) {
+        $scope.songs = Songs.query({ genre: $stateParams.genre });
+      } else {
+        $scope.songs = Songs.query();
+      }
+    };
+    // Find existing Song
+    $scope.findOne = function () {
+      $scope.song = Songs.get({ songId: $stateParams.songId });
+    };
+    //	Rating
+    $scope.rating = 5;
+    $scope.rate = 0;
+    $scope.rateFunction = function (rating) {
+      $scope.rate = rating;
+    };
+    // Search
+    $scope.onSearch = function (name) {
+      $state.go('listSongsByGenre', { genre: name });
+    };
+  }
+]).directive('starRating', function () {
+  return {
+    restrict: 'A',
+    template: '<ul class="rating">' + ' <li ng-repeat="star in stars" ng-class="star" ng-click="toggle($index)">' + '\u2605' + '</li>' + '</ul>',
+    scope: {
+      ratingValue: '=',
+      max: '=',
+      onRatingSelected: '&'
+    },
+    link: function postLink(scope, element, attrs) {
+      // Star rating directive logic
+      // ...
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({ filled: i < scope.ratingValue });
+        }
+      };
+      var updateStars = function () {
+        scope.stars = [];
+        for (var i = 0; i < scope.max; i++) {
+          scope.stars.push({ filled: i < scope.ratingValue });
+        }
+      };
+      scope.toggle = function (index) {
+        scope.ratingValue = index + 1;
+        scope.onRatingSelected({ rating: index + 1 });
+      };
+      scope.$watch('ratingValue', function (oldVal, newVal) {
+        if (newVal) {
+          updateStars();
+        }
+      });
+    }
+  };
+});'use strict';
+//Songs service used to communicate Songs REST endpoints
+angular.module('songs').factory('Songs', [
+  '$resource',
+  function ($resource) {
+    return $resource('/songs/:songId', { songId: '@_id' }, { update: { method: 'PUT' } });
+  }
+]);'use strict';
 // Config HTTP Error Handling
 angular.module('users').config([
   '$httpProvider',
