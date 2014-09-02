@@ -179,7 +179,6 @@ exports.create = function(req, res) {
             var extIndex = tmpPath.lastIndexOf('.');
             var extension = (extIndex < 0) ? '' : tmpPath.substr(extIndex);
             // uuid is for generating unique filenames. 
-            var fileName = uuid.v4() + extension;
             var destPath =  path.resolve('public/modules/core/img/server' + tmpPath);
             uploadImage(req, res, contentType, tmpPath, destPath);
             song.imageUrl = 'modules/core/img/server' + tmpPath;
