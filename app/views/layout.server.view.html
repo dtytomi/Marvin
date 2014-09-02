@@ -59,11 +59,6 @@
     <!--Application JavaScript Files-->
     {% for jsFile in jsFiles %}<script type="text/javascript" src="{{jsFile}}"></script>
     {% endfor %} 
-    <script type="text/javascript" src="lib/jquery/dist/jquery.min.js"></script>
-    <script type="text/javascript" src="modules/core/jquery.reflection.js"></script>
-    <script type="text/javascript" src="modules/core/jquery.cloud9carousel.js"></script>
-    <script type="text/javascript" src="modules/core/script.js">
-    </script>
 
     {% if process.env.NODE_ENV === 'development' %}
     <!--Livereload script rendered -->
