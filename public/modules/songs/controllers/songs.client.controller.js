@@ -6,6 +6,9 @@ angular.module('songs')
 	function($scope, $upload, $stateParams, $state, $location, Authentication, Songs ) {
 		$scope.authentication = Authentication;
 
+		//genre options
+		$scope.genres = ["Acoustic", "Blues", "Classiscal", "Country", "Ethnic", "Folk", "Gospel",
+							"Hip-Hop", "Jazz", "Latin", "Opera", "Rap", "R & B", "Reggea", "Soul"];
 		// Create new Song
 		$scope.create = function() {
 			// Create new Song object
@@ -75,9 +78,7 @@ angular.module('songs')
 			});
 		};
 
-		//	Rating
-	    $scope.rating = 5;
-	   	$scope.rate = 0;	
+		//	Rating	
 	    $scope.rateFunction = function(rating) {
 	      $scope.rate = rating;
 	    };

@@ -6,6 +6,8 @@
 
 ul.rating {
   display: inline-block;
+  margin-left: 15px;
+  padding-top: 5px;
 }
 
 .rating li {

@@ -3,4 +3,5 @@
 .sass-cache/
 npm-debug.log
 app/tests/coverage/
+.bower-*/
 .idea/

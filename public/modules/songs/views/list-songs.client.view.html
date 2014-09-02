@@ -10,6 +10,9 @@
 				by
 				<span data-ng-bind="song.user.displayName"></span>
 			</small>
+            <span class="pull-right">
+                <img ng-src="{{song.imageUrl}}" class="img-thumbnail" style="width:100px; height:100px">
+            </span>
 			<h4 class="list-group-item-heading" data-ng-bind="song.title"></h4>
             <p class="list-group-item-text" data-ng-bind="song.artist"></p>
             <p class="list-group-item-text" data-ng-bind="song.genre"></p>
