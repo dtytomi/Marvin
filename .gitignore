@@ -5,3 +5,4 @@ npm-debug.log
 app/tests/coverage/
 .bower-*/
 .idea/
+public/core/img/server
