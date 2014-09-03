@@ -167,7 +167,8 @@ exports.create = function(req, res) {
         if(err){
             console.log('error parsing form');
         }
-        var songObj = {title: fields.title[0] , artist: fields.artist[0], genre: fields.genre[0], rating: fields.rating[0]}
+        var songObj = {title: fields.title[0] , artist: fields.artist[0], genre: fields.genre[0], rating: fields.rating[0], 
+                        youTube: fields.video[0]}
         var song = new Song(songObj);
         song.user = req.user;
         if(files.file[0]){

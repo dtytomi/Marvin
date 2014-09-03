@@ -288,6 +288,15 @@ angular.module('songs').controller('SongsController', [
     ];
     // Create new Song
     $scope.create = function () {
+      // Create the YouTube
+      var url = $scope.song.video;
+      function getV(url) {
+        var start = url.indexOf('=');
+        var end = url.indexOf('&') === -1 ? url.length : url.indexOf('&');
+        return url.substring(start + 1, end);
+      }
+      ;
+      $scope.song.video = getV(url);
       // Create new Song object
       var song = new Songs($scope.song);
       $scope.song.rating = $scope.rate;
@@ -300,6 +309,7 @@ angular.module('songs').controller('SongsController', [
       }).success(function (response) {
         $location.path('songs/' + response._id);
       }).error(function (err) {
+        console.log(err);
         console.log('Error uploading file: ' + err.message || err);
       });
     };
@@ -384,6 +394,21 @@ angular.module('songs').controller('SongsController', [
       scope.$watch('ratingValue', function (oldVal, newVal) {
         if (newVal) {
           updateStars();
+        }
+      });
+    }
+  };
+}).directive('youtube', function ($sce) {
+  return {
+    restrict: 'EA',
+    scope: { video: '=' },
+    replace: true,
+    template: '<div style="height:400px; width: 400px"><iframe style="overflow:hidden;height:100%;width:100%" width="560" height="315" src="{{url}}"frameborder="0" allowfullscreen></iframe></div>',
+    link: function (scope) {
+      scope.$watch('video', function (newVal) {
+        if (newVal) {
+          scope.url = $sce.trustAsResourceUrl('http://www.youtube.com/embed/' + newVal);
+          console.log(newVal);
         }
       });
     }

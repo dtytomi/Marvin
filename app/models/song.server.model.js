@@ -36,6 +36,10 @@ var SongSchema = new Schema({
 	imageUrl: {
 		type: String
 	},
+	youTube: {
+		type: String,
+		default: ''
+	},
 	rating: {
 		type: Number,
 		default: 0,
