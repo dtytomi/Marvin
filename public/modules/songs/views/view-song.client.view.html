@@ -21,9 +21,13 @@
 				<span data-ng-bind="song.user.displayName"></span>
 			</em>
 		</small><br>
-		<div youtube video="song.youTube"></div>
-		<p class="lead" data-ng-bind="song.artist"></p>
-	    <p class="lead" data-ng-bind="song.genre"></p>
-	    <p class="lead" data-ng-bind="song.rating"></p>
+		<span class="pull-left">
+			<div youtube video="song.youTube"></div>
+		</span>
+		<span class="pull-right">
+			<p class="lead" data-ng-bind="song.artist"></p>
+		    <p class="lead" data-ng-bind="song.genre"></p>
+		    <p class="lead" data-ng-bind="song.rating"></p>
+	    </span>
     </div>
 </section>
