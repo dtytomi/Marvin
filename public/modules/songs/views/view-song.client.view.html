@@ -21,13 +21,11 @@
 				<span data-ng-bind="song.user.displayName"></span>
 			</em>
 		</small><br>
-		<span class="pull-left">
-			<div youtube video="song.youTube"></div>
-		</span>
-		<span class="pull-right" style="padding-top: 40px;">
-			<p class="lead" data-ng-bind="song.artist"></p>
-		    <p class="lead" data-ng-bind="song.genre"></p>
-		    <p class="lead" data-ng-bind="song.rating"></p>
-	    </span>
+		<img src="{{song.imageUrl}}" class="img-thumbnail" style="width:140px; height:140px">
+		<p class="lead" data-ng-bind="song.artist"></p>
+	    <p class="lead" data-ng-bind="song.genre"></p>
+	    <p class="lead" data-ng-bind="song.rating"></p>
+	    <div class="star-rating" star-rating rate-value="rating" data-ng-model="song.rating" 
+	    data-max="5" on-rating-selected="rateFunction(rating)"></div>
     </div>
 </section>

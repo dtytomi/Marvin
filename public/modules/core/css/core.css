@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .content {
 	margin-top: 50px;
 }
@@ -81,4 +82,19 @@ body {
         width: 25%;
         padding-bottom: 25%;
       }
+<<<<<<< HEAD
     }
+=======
+    }
+=======
+.content {
+	margin-top: 50px;
+}
+.undecorated-link:hover {
+	text-decoration: none;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+	display: none !important;
+}
+>>>>>>> d44945c3593ec8293feb443c2836dfda7a79e854
+>>>>>>> 42c82c75528e895767be415b64e52440963417c6

@@ -1,7 +1,9 @@
 {
   "name": "angular",
-  "version": "1.2.23",
+  "version": "1.2.21",
   "main": "./angular.js",
-  "dependencies": {
+  "dependencies": {	
+
+  			[ "ng-file-upload-shim", "ng-file-upload"]
   }
 }

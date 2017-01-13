@@ -1,4 +1,4 @@
-'use strict';
+	('use strict';
 
 //Setting up route
 angular.module('songs').config(['$stateProvider',

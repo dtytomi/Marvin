@@ -112,3 +112,24 @@ p {
 #login > p span {
 	padding-left: 5px;
 }
+<<<<<<< HEAD
+=======
+/*=======
+@media (min-width: 992px) {
+	.nav-users {
+		position: fixed;
+	}
+}
+
+.remove-account-container {
+	display: inline-block;
+	position: relative;
+}
+
+.btn-remove-account {
+	top: 10px;
+	right: 10px;
+	position: absolute;
+}
+>>>>>>> d44945c3593ec8293feb443c2836dfda7a79e854*/
+>>>>>>> 42c82c75528e895767be415b64e52440963417c6
